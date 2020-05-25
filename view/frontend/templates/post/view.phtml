@@ -41,6 +41,14 @@ $color = $helper->getBlogConfig('general/font_color');
 ?>
 
 <div class="mp-blog-view">
+    <div class="sliderblog">
+        <?php
+        if ($_post->getdata('featured') == 1) {
+            echo $block->getLayout()->createBlock("Mageplaza\BannerSlider\Block\Widget")->setSliderId(3)->toHtml();
+        }
+
+        ?>
+    </div>
     <div class="mp-blog-rss">
         <a href="<?= /* @noEscape */ $block->getRssUrl('post/rss') ?>" class="bb-rss-icon">
             <img src="<?= /* @noEscape */ $this->getViewFileUrl('Mageplaza_Blog::media/images/rss.png') ?>" width="16px">

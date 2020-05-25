@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Mageplaza
  *
@@ -59,24 +60,19 @@ class UpgradeSchema implements UpgradeSchemaInterface
         $installer->startSetup();
 
         $connection = $installer->getConnection();
-        if(version_compare($context->getVersion(), '2.5.3', '<')) {
-			$installer->getConnection()->addColumn(
-				$installer->getTable( 'mageplaza_blog_post' ),
-				'featured',
-				[
-					'type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
-					'nullable' => true,
-					'length' => '12,4',
-					'comment' => 'featured',
-					'after' => 'image'
-				]
-			);
-		}
-
-
-
-		// $installer->endSetup();
-
+        if (version_compare($context->getVersion(), '2.5.3', '<')) {
+            $installer->getConnection()->addColumn(
+                $installer->getTable('mageplaza_blog_post'),
+                'featured',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    'nullable' => true,
+                    'length' => '12,4',
+                    'comment' => 'featured',
+                    'after' => 'image'
+                ]
+            );
+        }
         if (!$this->helperData->versionCompare('2.3.0')) :
             if (version_compare($context->getVersion(), '1.1.1', '<')) {
                 if ($installer->tableExists('mageplaza_blog_tag')) {
@@ -662,8 +658,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     if (!$connection->tableColumnExists(
                         $installer->getTable('mageplaza_blog_category'),
                         'import_source'
-                    )
-                    ) {
+                    )) {
                         $connection->addColumn($installer->getTable('mageplaza_blog_category'), 'import_source', [
                             'type'    => Table::TYPE_TEXT,
                             null,
@@ -677,8 +672,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     if (!$connection->tableColumnExists(
                         $installer->getTable('mageplaza_blog_comment'),
                         'import_source'
-                    )
-                    ) {
+                    )) {
                         $connection->addColumn($installer->getTable('mageplaza_blog_comment'), 'import_source', [
                             'type'    => Table::TYPE_TEXT,
                             null,
@@ -692,8 +686,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     if (!$connection->tableColumnExists(
                         $installer->getTable('mageplaza_blog_topic'),
                         'import_source'
-                    )
-                    ) {
+                    )) {
                         $connection->addColumn($installer->getTable('mageplaza_blog_topic'), 'import_source', [
                             'type'    => Table::TYPE_TEXT,
                             null,
@@ -861,8 +854,10 @@ class UpgradeSchema implements UpgradeSchemaInterface
                         $installer->getFkName('mageplaza_blog_author', 'user_id', 'admin_user', 'user_id')
                     );
                 }
-                if ($installer->tableExists('mageplaza_blog_author')
-                    && $installer->tableExists('mageplaza_blog_post')) {
+                if (
+                    $installer->tableExists('mageplaza_blog_author')
+                    && $installer->tableExists('mageplaza_blog_post')
+                ) {
                     $connection->addForeignKey(
                         $installer->getFkName('mageplaza_blog_post', 'author_id', 'mageplaza_blog_author', 'user_id'),
                         $installer->getTable('mageplaza_blog_post'),

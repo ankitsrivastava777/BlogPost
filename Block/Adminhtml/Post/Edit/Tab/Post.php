@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Mageplaza
  *
@@ -184,6 +185,12 @@ class Post extends Generic implements TabInterface
             'label'    => __('Name'),
             'title'    => __('Name'),
             'required' => true
+        ]);
+        $fieldset->addField('featured', 'select', [
+            'name'     => 'featured',
+            'label'    => __('feature'),
+            'title'    => __('Feature'),
+            'values' => $this->booleanOptions->toOptionArray(),
         ]);
         $fieldset->addField('author_id', 'select', [
             'name'     => 'author_id',
