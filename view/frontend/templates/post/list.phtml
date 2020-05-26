@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Mageplaza
  *
@@ -20,15 +21,42 @@
  */
 
 /** @var \Mageplaza\Blog\Block\Frontend $block */
+
 ?>
+
+<?php $postCollection = $block->getPostCollection(); ?>
+<div class="carousel-container">
+    <div class="blog_slider" id="banner-slider-carousel">
+        <div class="owl-carousel owl-theme">
+            <?php /** @var \Mageplaza\Blog\Model\Post $post */
+            foreach ($postCollection as $post) : ?>
+                <?php if ($post->getData('featured') == 1) { ?>
+                    <div class="banner-item banner-slider">
+                        <div class="item-content">
+                            <div class="item-image">
+                                <a class="owl-image" href="<?= $post->getUrl() ?>">
+                                    <img src="<?= $block->resizeImage($post->getImage()); ?>" alt="<?= $block->escapeHtml($post->getName()); ?>">
+                                </a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                <?php
+                }
+                ?>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</div>
 
 <div class="mp-blog-rss">
     <a href="<?= $block->getRssUrl('post/rss') ?>" class="bb-rss-icon">
         <img src="<?= $this->getViewFileUrl('Mageplaza_Blog::media/images/rss.png') ?>" width="16px">
     </a>
 </div>
+
 <div class="post-list-content" id="mpblog-list-container">
-    <?php $postCollection = $block->getPostCollection(); ?>
     <?php if ($postCollection && $postCollection->getSize()) : ?>
         <div class="post-list-body">
             <?php $i = 1 ?>
@@ -39,16 +67,13 @@
                         <?php if ($post->getImage()) : ?>
                             <div class="post-image">
                                 <a href="<?= $post->getUrl() ?>">
-                                    <img class="img-responsive"
-                                         src="<?= $block->resizeImage($post->getImage(), '400x'); ?>"
-                                         alt="<?= $block->escapeHtml($post->getName()); ?>"/>
+                                    <img class="img-responsive" src="<?= $block->resizeImage($post->getImage(), '400x'); ?>" alt="<?= $block->escapeHtml($post->getName()); ?>" />
                                 </a>
                             </div>
                         <?php endif; ?>
                         <div class="post-info-wraper">
                             <h2 class="mp-post-title">
-                                <a class="post-link-title" title="<?= $block->escapeHtml($post->getName()); ?>"
-                                   href="<?= $post->getUrl() ?>">
+                                <a class="post-link-title" title="<?= $block->escapeHtml($post->getName()); ?>" href="<?= $post->getUrl() ?>">
                                     <?= $post->getName(); ?>
                                 </a>
                             </h2>
@@ -61,8 +86,7 @@
                             <div class="mp-clearfix"></div>
                             <div class="mp-post-meta-info mp-alignright">
                                 <div class="actions">
-                                    <a class="mp-read-more" href="<?= $post->getUrl(); ?>"
-                                       title="<?= __('Read More'); ?>">
+                                    <a class="mp-read-more" href="<?= $post->getUrl(); ?>" title="<?= __('Read More'); ?>">
                                         <?= __('Read More'); ?>
                                     </a>
                                 </div>
@@ -83,8 +107,24 @@
     <?= $this->getChildHtml('additional'); ?>
 </div>
 <script>
-    require(['jquery'], function ($) {
+    require(['jquery'], function($) {
         $('.limiter').css('float', 'right');
     });
 </script>
 
+<script>
+    (function() {
+        require(["jquery", "mageplaza/core/owl.carousel"], function($) {
+            $(document).ready(function() {
+                $(".owl-carousel").owlCarousel({
+                    navigation: true, // Show next and prev buttons
+                    autoplay: true, //Set AutoPlay to 3 seconds 
+                    items: 1,
+                    loop: true,
+                    nav: true,
+                    autoplayTimeout: 3000
+                });
+            });
+        });
+    })();
+</script>
