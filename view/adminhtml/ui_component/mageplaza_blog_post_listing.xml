@@ -177,19 +177,6 @@
                 </item>
             </argument>
         </column>
-        <column name="featured">
-            <argument name="data" xsi:type="array">
-                <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Yesno</item>
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">select</item>
-                    <item name="sortOrder" xsi:type="number">5</item>
-                    <item name="label" xsi:type="string" translate="true">Featured</item>
-                    <item name="editor" xsi:type="string">select</item>
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
-                    <item name="dataType" xsi:type="string">select</item>
-                </item>
-            </argument>
-        </column>
         <column name="enabled">
             <argument name="data" xsi:type="array">
                 <item name="options" xsi:type="object">Mageplaza\Blog\Model\Config\Source\AuthorStatus</item>
@@ -226,7 +213,18 @@
                 </item>
             </argument>
         </column>
-
+        <column name="featured">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Yesno</item>
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Featured</item>
+                    <item name="editor" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                </item>
+            </argument>
+        </column>
         <column name="allow_comment">
             <argument name="data" xsi:type="array">
                 <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Yesno</item>
