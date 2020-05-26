@@ -24,15 +24,7 @@
 
 ?>
 
-<link rel="stylesheet" type="text/css" href="<?php echo $block->getViewFileUrl('Magento_Catalog::css/owl.theme.default.min.css') ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo $block->getViewFileUrl('Magento_Catalog::css/owl.theme.default.css') ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo $block->getViewFileUrl('Magento_Catalog::css/owl.carousel.min.css') ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo $block->getViewFileUrl('Magento_Catalog::css/docs.theme.min.css') ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo $block->getViewFileUrl('Magento_Catalog::css/bannerslider.css') ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo $block->getViewFileUrl('Magento_Catalog::css/animate.min.css') ?>">
-
 <?php $postCollection = $block->getPostCollection(); ?>
-
 <div class="carousel-container">
     <div class="blog_slider" id="banner-slider-carousel">
         <div class="owl-carousel owl-theme">
@@ -41,7 +33,6 @@
                 <?php if ($post->getData('featured') == 1) { ?>
                     <div class="banner-item banner-slider">
                         <div class="item-content">
-
                             <div class="item-image">
                                 <a class="owl-image" href="<?= $post->getUrl() ?>">
                                     <img src="<?= $block->resizeImage($post->getImage()); ?>" alt="<?= $block->escapeHtml($post->getName()); ?>">
@@ -55,12 +46,9 @@
                 }
                 ?>
             <?php endforeach; ?>
-
         </div>
-
     </div>
 </div>
-
 
 <div class="mp-blog-rss">
     <a href="<?= $block->getRssUrl('post/rss') ?>" class="bb-rss-icon">
@@ -135,7 +123,6 @@
                     loop: true,
                     nav: true,
                     autoplayTimeout: 3000
-
                 });
             });
         });
